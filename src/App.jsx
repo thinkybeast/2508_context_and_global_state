@@ -37,8 +37,8 @@ const CoolContent = () => {
         <option value={"green"}>Green</option>
       </select>
       <div style={{ fontSize: "3rem", display: "flex", gap: "36px" }}>
-        <button>🏈</button>
-        <button>⚽️</button>
+        <button>🤡</button>
+        <button>👻</button>
       </div>
     </div>
   );
@@ -119,7 +119,7 @@ const Votes = () => {
           justifyContent: "center",
         }}
       >
-        <span>🏈: 0</span> <span>⚽️: 0</span>
+        <span>🤡: 0</span> <span>👻: 0</span>
       </div>
     </div>
   );

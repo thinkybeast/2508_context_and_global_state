@@ -9,14 +9,14 @@ export const AppContext = React.createContext();
 
 const initialState = {
   theme: "default",
-  americanFootballVotes: 0,
-  europeanFootballVotes: 0,
+  clownVotes: 0,
+  ghostVotes: 0,
 };
 
-const calculateNextTheme = (americanFootballVotes, europeanFootballVotes) => {
-  if (americanFootballVotes > europeanFootballVotes) {
+const calculateNextTheme = (clownVotes, ghostVotes) => {
+  if (clownVotes > ghostVotes) {
     return "green";
-  } else if (americanFootballVotes < europeanFootballVotes) {
+  } else if (clownVotes < ghostVotes) {
     return "red";
   } else {
     return "default";
@@ -28,21 +28,15 @@ const stateReducer = (prevState, action) => {
   switch (type) {
     case "CHANGE_THEME":
       return { ...prevState, theme: payload };
-    case "VOTE_USA_FOOTBALL": {
-      const americanFootballVotes = prevState.americanFootballVotes + 1;
-      let nextTheme = calculateNextTheme(
-        americanFootballVotes,
-        prevState.europeanFootballVotes
-      );
-      return { ...prevState, americanFootballVotes, theme: nextTheme };
+    case "VOTE_CLOWN": {
+      const clownVotes = prevState.clownVotes + 1;
+      let nextTheme = calculateNextTheme(clownVotes, prevState.ghostVotes);
+      return { ...prevState, clownVotes, theme: nextTheme };
     }
-    case "VOTE_EURO_FOOTBALL": {
-      const europeanFootballVotes = prevState.europeanFootballVotes + 1;
-      let nextTheme = calculateNextTheme(
-        prevState.americanFootballVotes,
-        europeanFootballVotes
-      );
-      return { ...prevState, europeanFootballVotes, theme: nextTheme };
+    case "VOTE_GHOST": {
+      const ghostVotes = prevState.ghostVotes + 1;
+      let nextTheme = calculateNextTheme(prevState.clownVotes, ghostVotes);
+      return { ...prevState, ghostVotes, theme: nextTheme };
     }
     default:
       throw new Error(`Unsupported action type: ${type}`);
